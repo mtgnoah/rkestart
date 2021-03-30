@@ -1,15 +1,15 @@
 nodes:
-- address: 192.168.0.111
-  internal_address:
-  hostname_override: rke-worker-01
-  role: [worker]
-  user: rke
-  ssh_key: ""
-  ssh_key_path: ~/.ssh/id2_rsa
 - address: 192.168.0.197
   internal_address:
   hostname_override: rke-master-01
   role: [controlplane, etcd]
+  user: rke
+  ssh_key: ""
+  ssh_key_path: ~/.ssh/id2_rsa
+- address: 192.168.0.111
+  internal_address:
+  hostname_override: rke-worker-01
+  role: [worker]
   user: rke
   ssh_key: ""
   ssh_key_path: ~/.ssh/id2_rsa
@@ -51,6 +51,9 @@ kube-api:
   # Expose a different port range for NodePort services
   service_node_port_range: 30000-32767
   pod_security_policy: false
+  extra_args:
+    insecure-port: "8080"
+    insecure-bind-address: "127.0.0.1"
 
 
 kube-controller:
